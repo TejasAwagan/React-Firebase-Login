@@ -1,58 +1,46 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
-import { Link} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
-// import Signin from "../signin/signin";
 
 function SignUp() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [error, SeterrorMsg] = useState("");
   // const [submitButtonDisabled] = useState(false);
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setpassword] = useState("");
 
-  const onSubmit = async () => {
-    console.log(values);
-    if (!values.name || !values.email || !values.password) {
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    console.log(email,password);
+    if (!email || !password) {
       SeterrorMsg("Fill All the Fields");
     }
     SeterrorMsg("");
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth);
+      const userCredential = await createUserWithEmailAndPassword(auth,email,password);
       console.log(userCredential);
       const user = userCredential.user;
       localStorage.setItem("token", user.accessToken);
       localStorage.setItem("user", JSON.stringify(user));
-      // navigate("/");
-    } catch (error) {}
+      navigate("/");
+    } catch (error) {
+      SeterrorMsg("Something Went Wrong");
+    }
   };
 
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>SignUp</h1>
-      <div className={styles.username}>
-        <input
-          // value={values.name}
-          type="text"
-          placeholder="Enter your Name"
-          onChange={(event) =>
-            setValues((prev) => ({ ...prev, name: event.target.values }))
-          }
-        />
-      </div>
 
       <div className={styles.username}>
         <input
-          // value={values.email}
+          required
           type="email"
+          value={email}
           placeholder="Enter your Email"
-          onChange={(event) =>
-            setValues((prev) => ({ ...prev, email: event.target.values }))
-          }
+          onChange={(e) =>setEmail(e.target.value)}
         />
       </div>
 
@@ -61,9 +49,8 @@ function SignUp() {
           // value={values.password }
           type="password"
           placeholder="Enter your Password"
-          onChange={(event) =>
-            setValues((prev) => ({ ...prev, password: event.target.values }))
-          }
+          value={password}
+          onChange={(e) =>setpassword(e.target.value)}
         />
       </div>
 

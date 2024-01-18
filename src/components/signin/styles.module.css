@@ -83,7 +83,6 @@ body {
     border-radius: 30px;
     border: none;
     background-color: chartreuse;
-    cursor: pointer;
 }
 
 .errormsg {

@@ -3,14 +3,14 @@ import React from 'react'
 import { auth } from '../../firebase'
 import { useNavigate } from 'react-router-dom';
 
-function home() {
+function Home() {
 
     const navigate = useNavigate;
 
     const handleLogout = async() =>{
         await signOut(auth);
-        localStorage.setItem("token");
-        localStorage.setItem("user");
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
         navigate("/signin");
     }
 
@@ -22,4 +22,4 @@ function home() {
   )
 }
 
-export default home
+export default Home;

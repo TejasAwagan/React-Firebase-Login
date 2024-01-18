@@ -4,6 +4,26 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import{
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  createRoutesFromElements,
+} from "react-router-dom";
+import SignUp from './components/signup/signup';
+import Signin from './components/signin/signin';
+
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+  <Route path='/' element={<App />}> 
+    <Route path='signup' element={<SignUp />} />
+    <Route path='signin' element={<Signin />} />
+  </Route>
+  )
+  
+);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

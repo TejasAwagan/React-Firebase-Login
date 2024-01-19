@@ -2,10 +2,11 @@ import { signOut } from 'firebase/auth'
 import React from 'react'
 import { auth } from '../../firebase'
 import { useNavigate } from 'react-router-dom';
+import styles from "./styles.module.css";
 
 function Home() {
 
-    const navigate = useNavigate;
+    const navigate = useNavigate();
 
     const handleLogout = async() =>{
         await signOut(auth);
@@ -16,8 +17,9 @@ function Home() {
 
   return (
     <div>
-        <h1>Welcome to Dashboard</h1>
-        <button onClick={handleLogout}>Logout</button>
+        <h1 className={styles.heading}>Welcome to React Firebase Authentication</h1>
+
+        <button className={styles.submit_btn} onClick={handleLogout}>Logout</button>
     </div>
   )
 }

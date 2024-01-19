@@ -1,0 +1,14 @@
+.submit_btn {
+    width: 149px;
+    height: 50px;
+    font-size: 1.5rem;
+    border-radius: 30px;
+    border: none;
+    background-color: chartreuse;
+    margin-top: 20px;
+}
+
+.heading{
+    color: #fff;
+    font-size: 3rem
+}
